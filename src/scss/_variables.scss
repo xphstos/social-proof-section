@@ -1,11 +1,10 @@
 @use "sass:color" as *;
 
 $colors: (
-	"violet": hsl(263, 55%, 52%),
-	"blue-greyish-dark": hsl(217, 19%, 35%),
-	"blue-greyish-light": hsl(210, 46%, 95%),
-	"blue-blackish-dark": hsl(219, 29%, 14%),
-	"grey-light": hsl(0, 0%, 81%),
+	"magenta-light": hsl(300, 24%, 96%),
+	"magenta-greyish": hsl(303, 10%, 53%),
+	"magenta-dark": hsl(300, 43%, 22%),
+	"pink": hsl(333, 80%, 67%),
 	"white": hsl(0, 0%, 100%),
 	"black": hsl(0, 0%, 0%)
 );

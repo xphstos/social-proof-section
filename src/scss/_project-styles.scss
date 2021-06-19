@@ -1,132 +1,181 @@
-@use "./mixins" as *;
+@use './mixins' as *;
 @use "sass:color" as *;
 
-.testimonials {
-	padding: 0 Max(24px, (50vw - 1100px / 2));
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-	grid-template-areas: "clifford clifford walters whittle" "harmon abrams abrams whittle";
-	gap: 24px;
-	position: relative;
-	z-index: 1;
+body {
+	background: no-repeat url("../images/bg-pattern-top-desktop.svg") top left,
+		no-repeat url("../images/bg-pattern-bottom-desktop.svg") bottom right,
+		var(--magenta-light);
 
-	@media screen and (max-width: 1100px) {
-		padding: 0 Max(24px, (50vw - 425px / 2));
-		grid-template-columns: 1fr;
-		grid-template-areas: unset;
-
-		> * {
-			grid-area: unset !important;
-		}
+	@media screen and (max-width: 1024px) {
+		background: no-repeat url("../images/bg-pattern-top-mobile.svg") top left,
+			no-repeat url("../images/bg-pattern-bottom-mobile.svg") bottom right,
+			var(--magenta-light);
 	}
 }
 
-.testimonial {
-	padding: 24px 32px;
-	border-radius: 10px;
-	display: flex;
-	flex-direction: column;
-	box-shadow: 16px 24px 24px -12px scale(c("blue-blackish-dark"), $alpha: -80%);
+.social-proof {
+	padding: 0 max(24px, 50vw - 1110px / 2);
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 72px;
 
-	> * {
-		+ * {
-			margin: 16px 0 0 0;
-		}
-	}
+	@media screen and (max-width: 1024px) {
+		display: block;
 
-	&--clifford {
-		--border-color: #{scale(c("violet"), $lightness: 30%)};
-		background-color: v("violet");
-		grid-area: clifford;
-		position: relative;
-
-		&:before {
-			content: "";
-			position: absolute;
-			color: v("border-color");
-			z-index: 1;
-			background: no-repeat url("../images/bg-pattern-quotation.svg") 100% /
-				100%;
-			width: 112px;
-			height: 112px;
-			right: 15%;
-			top: 0;
-		}
-
-		@media screen and (max-width: 1100px) {
-			&:before {
-				right: 8%;
+		> * {
+			+ * {
+				margin-top: 48px;
 			}
 		}
+		padding: 0 max(24px, 50vw - 425px / 2);
+	}
 
-		> * {
-			contain: layout;
-			z-index: 2;
+	&__header {
+		@media screen and (max-width: 425px) {
+			text-align: center;
 		}
-	}
-
-	&--walters {
-		--border-color: #{scale(c("blue-greyish-dark"), $lightness: 50%)};
-		background-color: v("blue-greyish-dark");
-		color: v("grey-light");
-		grid-area: walters;
-	}
-
-	&--harmon {
-		--border-color: #{scale(c("white"), $lightness: -50%)};
-		background-color: v("white");
-		color: v("blue-greyish-dark");
-		grid-area: harmon;
-	}
-
-	&--abrams {
-		--border-color: #{scale(c("blue-blackish-dark"), $lightness: 40%)};
-		background-color: v("blue-blackish-dark");
-		color: v("grey-light");
-		grid-area: abrams;
-	}
-
-	&--whittle {
-		--border-color: #{scale(c("white"), $lightness: -50%)};
-		background-color: v("white");
-		color: v("blue-greyish-dark");
-		grid-area: whittle;
-	}
-
-	&__short-quote {
-		font-size: 20px;
-		margin-bottom: 16px;
-	}
-
-	&__quote {
-		opacity: 0.75;
-		margin-top: auto;
-	}
-}
-
-.author {
-	display: grid;
-	align-items: center;
-	grid-template-columns: 32px 1fr;
-	grid-template-areas: "i name" "i title";
-	gap: 0 16px;
-
-	&__image {
-		grid-area: i;
-		width: 32px;
-		height: 32px;
-		border-radius: 16rem;
-		border: 2px solid v("border-color");
-		vertical-align: middle;
-	}
-
-	&__name {
-		grid-area: name;
-		font-weight: bold;
 	}
 
 	&__title {
-		grid-area: title;
-		opacity: 0.5;
+		font-size: clamp(32px, (48 / 1024) * 100vw, 48px);
+		line-height: 1;
+		letter-spacing: -0.04em;
+		max-width: 10ch;
+		margin-bottom: 16px;
+
+		@media screen and (max-width: 1024px) {
+			max-width: unset;
+		}
+	}
+
+	&__description {
+		color: v("magenta-greyish");
+		max-width: 37ch;
+		font-weight: 500;
+
+		@media screen and (max-width: 1024px) {
+			max-width: unset;
+		}
+	}
+
+	&__ratings {
+		align-self: center;
+		justify-self: end;
+	}
+
+	&__reviews {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 32px;
+		grid-area: auto / span 2;
+
+		@media screen and (max-width: 1024px) {
+			display: block;
+
+			> * {
+				+ * {
+					margin-top: 16px;
+				}
+			}
+		}
+	}
+}
+
+.rating {
+	padding: 16px 32px;
+	border-radius: 10px;
+	background-color: scale(c("magenta-light"), $lightness: -3%);
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	max-width: 445px;
+
+	+ .rating {
+		margin-top: 16px;
+	}
+
+	&:nth-of-type(1) {
+		transform: translateX(-96px);
+	}
+
+	&:nth-of-type(2) {
+		transform: translateX(-48px);
+	}
+
+	@media screen and (max-width: 1024px) {
+		display: block;
+		text-align: center;
+		padding: 16px 8px;
+
+		&:nth-of-type(1),
+		&:nth-of-type(2) {
+			transform: translateX(0);
+		}
+
+		> * + * {
+			margin-top: 8px;
+		}
+	}
+
+	&__stars {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-right: 32px;
+
+		img {
+			vertical-align: middle;
+
+			+ img {
+				margin-left: 4px;
+			}
+		}
+	}
+
+	&__review {
+		font-weight: 700;
+		white-space: nowrap;
+	}
+}
+
+.review {
+	margin: 0;
+	border-radius: 10px;
+	background-color: v("magenta-dark");
+	color: v("white");
+	padding: 40px 32px;
+	display: grid;
+	gap: 16px;
+	font-size: 14px;
+
+	@for $i from 2 through 3 {
+		&:nth-of-type(#{$i}) {
+			transform: translateY(16px * ($i - 1));
+		}
+	}
+
+	.author {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		grid-template-areas: "i n" "i s";
+		gap: 0 16px;
+
+		&__image {
+			width: 40px;
+			height: 40px;
+			border-radius: 20px;
+			vertical-align: middle;
+			grid-area: i;
+		}
+
+		&__name {
+			grid-area: n;
+		}
+
+		&__status {
+			color: v("pink");
+			grid-area: s;
+		}
 	}
 }

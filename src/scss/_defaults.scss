@@ -9,19 +9,19 @@
 }
 
 html {
-	font-size: 13px;
+	font-size: 15px;
 	height: 100%;
 }
 
 body {
-	min-height: 100vh;
+	min-height: 100%;
 	margin: 0;
 	padding: 72px 0;
-	font: 400 1rem / 1.5 "Barlow Semi Condensed", sans-serif;
+	font: 400 1rem / 1.5 "Spartan", sans-serif;
 	display: grid;
 	place-content: center;
-	color: var(--grey-light);
-	background-color: var(--blue-greyish-light);
+	color: var(--magenta-dark);
+	background-color: var(--magental-light);
 }
 
 @for $i from 1 through 6 {
@@ -36,6 +36,7 @@ p {
 
 // Attribution Defaults
 .attribution {
+	display: none;
 	font-size: 12px;
 	text-align: center;
 	position: fixed;
